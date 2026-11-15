@@ -3,7 +3,7 @@
 mkstick makes a bootable Windows or Linux USB stick from a web page, with nothing to install. This document explains what it does, how it is built, how to run and deploy it, and what is still open.
 
 - Codename: Project mkstick, said "make stick". It was called Flasher until 15 November 2026.
-- Staging site: https://staging.mkstick.czt.sh
+- Staging site: https://mkstick.czt.sh
 - Source code: https://github.com/conanzhangtech/mkstick
 - Public write-up: https://czt.sh/projects/mkstick
 - Licence: MIT
@@ -189,7 +189,7 @@ The full list is in [SECURITY.md](../SECURITY.md). The main points:
 Run the checks against any running copy:
 
 ```bash
-node test/security-check.mjs https://staging.mkstick.czt.sh
+node test/security-check.mjs https://mkstick.czt.sh
 ```
 
 No site can be proved unhackable. These are the things that stay outside mkstick's control:

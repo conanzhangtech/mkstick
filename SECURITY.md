@@ -23,7 +23,7 @@ Please report security problems in private, not in a public issue. Contact the m
 ## Checking it
 
 ```bash
-node test/security-check.mjs https://staging.mkstick.czt.sh
+node test/security-check.mjs https://mkstick.czt.sh
 ```
 
 This runs about 45 checks against a running copy: headers, the page's markup, methods, the pass-through, the API and the write route.

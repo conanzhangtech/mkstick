@@ -1,5 +1,5 @@
 // Checks a running mkstick site against the protections listed in SECURITY.md.
-// node test/security-check.mjs https://staging.mkstick.czt.sh
+// node test/security-check.mjs https://mkstick.czt.sh
 const base = (process.argv[2] || 'http://localhost:8794').replace(/\/$/, '')
 const iso = '/mirror/debian/debian-cd/current/amd64/iso-cd/debian-13.7.0-amd64-netinst.iso'
 let failed = 0

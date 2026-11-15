@@ -1,7 +1,7 @@
 // Scheduled job: asks Microsoft for fresh Windows download links and hands them to mkstick.
 // Microsoft's links last about 24 hours, so this runs every few hours.
 //
-//   MKSTICK_URL    the site, e.g. https://staging.mkstick.czt.sh
+//   MKSTICK_URL    the site, e.g. https://mkstick.czt.sh
 //   MKSTICK_TOKEN  the shared secret the site checks (LINKS_TOKEN on the Worker)
 //   PRODUCT, ARCH  optional: fetch one version only, e.g. win11 and arm64
 import { fetchLinks } from './mslink.js'

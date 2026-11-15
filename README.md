@@ -4,7 +4,7 @@ Full documentation: [docs/PROJECT.md](docs/PROJECT.md).
 
 Makes a bootable Windows or Linux USB stick from a web page. No app to install. Free and open source under the MIT licence.
 
-Site: https://staging.mkstick.czt.sh
+Site: https://mkstick.czt.sh
 
 Write-up: https://czt.sh/projects/mkstick
 

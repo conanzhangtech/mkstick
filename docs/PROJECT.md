@@ -96,6 +96,25 @@ There is no build step and no framework. The page is plain HTML, CSS and JavaScr
 - **Unsupported browsers** (Safari, Firefox, phones) see a notice. Everything except choosing a real stick still works.
 - **Header and footer** are the main site's own (section 6).
 
+### Support and donations
+
+Project mkstick stays free, with no adverts, paid features or tracking. Donations are asked for in three quiet places:
+
+- **The support section** (`#support`) lists GitHub Sponsors, Ko-fi, PayPal and two USDT addresses. Each address has a Copy button and a QR code. The QR codes are static SVG files in `public/qr/`. `tools/make-qr.mjs` draws them from the addresses in `index.html` and reads each one back to prove it holds exactly that address, so run it again if an address ever changes.
+- **The thank-you panel** appears under "Your stick is ready" after a write succeeds, and never during a write or after a failure. "Not now" hides it for 30 days. That date is the only thing the page keeps in the browser (`localStorage`, key `mkstick-thanks-dismissed`), and the page works the same if storage is blocked.
+- **The supporters wall** reads `public/supporters.json`, which is edited by hand. Each entry has a `name`, and may have an `https` `link` and a `tier`:
+
+```json
+[
+  { "name": "Ada Lovelace", "link": "https://example.com", "tier": "Sponsor" },
+  { "name": "A friend" }
+]
+```
+
+An empty list shows "Be the first supporter". Nothing is fetched from GitHub or any other site.
+
+On a local copy, `?demo=done` shows the finished screen and the thank-you panel without writing a stick, and `?demo=done&reset=1` also forgets an earlier "Not now".
+
 ## 5. The engine
 
 All of it runs in the browser and in Node, because it only needs "something to read bytes from" and "something shaped like a folder".

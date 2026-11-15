@@ -220,6 +220,16 @@
       <section class="block done" id="done" hidden>
         <h2>Your stick is ready</h2>
         <ul id="done-facts" class="summary"></ul>
+        <div class="notice thanks" id="thanks" hidden>
+          <p>Project mkstick is free, has no adverts and is built by one person in his own time. If it saved you some time today, please consider supporting it.</p>
+          <p class="thanks-actions">
+            <a class="btn small primary" href="https://github.com/sponsors/conanzhangtech" target="_blank" rel="noopener noreferrer">Sponsor on GitHub</a>
+            <a class="btn small" href="https://ko-fi.com/YOUR_KOFI_HANDLE" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>
+            <a class="btn small" href="https://paypal.me/conanzhangtech" target="_blank" rel="noopener noreferrer">PayPal</a>
+            <a class="btn small" href="#crypto">Crypto (USDT)</a>
+            <button class="linkbtn" id="thanks-close">Not now</button>
+          </p>
+        </div>
         <h3>Starting a PC from it</h3>
         <p>Eject the stick before you unplug it. Then plug it into the PC, switch the PC on and press its boot menu key straight away, before Windows starts. Choose the stick from the menu, and if it appears twice, choose the entry marked UEFI.</p>
         <table class="keys">
@@ -269,25 +279,51 @@
 
       <section class="block" id="support">
         <h2>Support Project mkstick</h2>
-        <p>Project mkstick is free and carries no adverts. If it saved you some time and you'd like to say thanks, a small donation helps keep it online.</p>
+        <p>Project mkstick is free, open source and carries no adverts. It is built and looked after by one person in his own time, and donations pay for the domain, the hosting and the hours spent adding new operating systems.</p>
         <ul class="give">
           <li>
+            <span class="k">GitHub Sponsors</span>
+            <span class="what">Monthly or one-off, through GitHub</span>
+            <a class="btn small" href="https://github.com/sponsors/conanzhangtech" target="_blank" rel="noopener noreferrer">Sponsor on GitHub</a>
+          </li>
+          <li>
+            <span class="k">Ko-fi</span>
+            <span class="what">A one-off tip, with no account needed</span>
+            <a class="btn small" href="https://ko-fi.com/YOUR_KOFI_HANDLE" target="_blank" rel="noopener noreferrer">Buy me a coffee</a>
+          </li>
+          <li>
             <span class="k">PayPal</span>
-            <a href="https://www.paypal.me/conanzhangtech" target="_blank" rel="noopener noreferrer">paypal.me/conanzhangtech</a>
-          </li>
-          <li>
-            <span class="k">USDT on Ethereum (ERC-20)</span>
-            <code id="addr-erc20">0x8Cc894EED2c98BEFB42477fd15868f59fa7D9C16</code>
-            <button class="btn small" data-copy="addr-erc20">Copy</button>
-          </li>
-          <li>
-            <span class="k">USDT on Tron (TRC-20)</span>
-            <code id="addr-trc20">TGHTXkjC8CpdLHF5g2m2RVsZ5QgzhyDWFi</code>
-            <button class="btn small" data-copy="addr-trc20">Copy</button>
+            <span class="what">Any amount, from a card or a PayPal balance</span>
+            <a class="btn small" href="https://paypal.me/conanzhangtech" target="_blank" rel="noopener noreferrer">Give with PayPal</a>
           </li>
         </ul>
+
+        <h3 id="crypto">Crypto (USDT)</h3>
+        <p class="notice warn">Send USDT only on the network named above each address, because coins sent on another network can't be recovered. After you paste or scan an address, check that its first and last few characters match what is shown here.</p>
+        <div class="coins">
+          <div class="coin">
+            <img src="/qr/usdt-erc20.svg" width="148" height="148" alt="QR code for the USDT address on Ethereum (ERC-20)" />
+            <div>
+              <h4>USDT on Ethereum (ERC-20)</h4>
+              <code id="addr-erc20">0x8Cc894EED2c98BEFB42477fd15868f59fa7D9C16</code>
+              <p><button class="btn small" data-copy="addr-erc20">Copy</button> <span class="muted small">Ethereum network only</span></p>
+            </div>
+          </div>
+          <div class="coin">
+            <img src="/qr/usdt-trc20.svg" width="148" height="148" alt="QR code for the USDT address on Tron (TRC-20)" />
+            <div>
+              <h4>USDT on Tron (TRC-20)</h4>
+              <code id="addr-trc20">TGHTXkjC8CpdLHF5g2m2RVsZ5QgzhyDWFi</code>
+              <p><button class="btn small" data-copy="addr-trc20">Copy</button> <span class="muted small">Tron network only</span></p>
+            </div>
+          </div>
+        </div>
+
+        <h3>Or tell people about it</h3>
         <p>A post helps as much as a donation. If Project mkstick helped you, tag <a href="https://www.instagram.com/conanzhangtech" target="_blank" rel="noopener noreferrer">@conanzhangtech</a> on Instagram and add <b>#projectmkstickbycztsh</b>, so other people can find it.</p>
-        <p class="muted small">Please send USDT only on the network named beside each address, because coins sent on another network can't be recovered. It's worth checking the first and last few characters after you paste.</p>
+
+        <h3>Thank you to our supporters</h3>
+        <div id="supporters"><p class="muted"><a href="#support">Be the first supporter</a>, and your name goes here.</p></div>
       </section>
       <p class="legal">Project mkstick is open source under the MIT licence. Windows is a trade mark of Microsoft, Ubuntu of Canonical and Debian of Software in the Public Interest, and Project mkstick isn't connected with any of them.</p>
       </div>
@@ -305,6 +341,7 @@
         </ul>
       </div>
       <p class="container p-foot-base">© 2026 Conan Zhang</p>
+      <p class="container p-foot-base p-foot-support"><a href="#support">Support Project mkstick</a></p>
     </footer>
 
     <script src="/vendor/sha256.umd.min.js"></script>

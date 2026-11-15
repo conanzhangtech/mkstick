@@ -389,6 +389,10 @@ function finish(digest, seconds) {
   ]
   if (digest && plan.info.sha256) rows.push(['Checksum', "matches the publisher's"])
   else if (digest) rows.push(['SHA-256 of the ISO', el('code', { textContent: digest })])
+  showDone(rows)
+}
+
+function showDone(rows) {
   const ul = $('done-facts')
   ul.replaceChildren()
   for (const [k, v] of rows) {
@@ -398,8 +402,61 @@ function finish(digest, seconds) {
     li.append(el('span', { className: 'k', textContent: k }), val)
     ul.append(li)
   }
+  $('thanks').hidden = !thanksDue()
   $('done').hidden = false
   $('done').scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
+// ---------- support ----------
+
+// The thank-you panel appears only after a finished write. "Not now" hides it for 30 days.
+// The date is kept in this browser only. If storage is blocked, the panel simply shows again.
+const THANKS_KEY = 'mkstick-thanks-dismissed'
+const THANKS_REST = 30 * 24 * 3600 * 1000
+
+function thanksDue() {
+  try {
+    const at = Number(localStorage.getItem(THANKS_KEY))
+    return !(at > 0 && Date.now() - at < THANKS_REST)
+  } catch {
+    return true
+  }
+}
+
+function dismissThanks() {
+  $('thanks').hidden = true
+  try {
+    localStorage.setItem(THANKS_KEY, String(Date.now()))
+  } catch {
+    // Storage is blocked. The panel is still closed for this visit.
+  }
+}
+
+// Supporters are listed in public/supporters.json, edited by hand:
+//   [{ "name": "Ada", "link": "https://example.com", "tier": "Sponsor" }]
+async function loadSupporters() {
+  try {
+    const res = await fetch('/supporters.json')
+    const list = res.ok ? await res.json() : []
+    const people = (Array.isArray(list) ? list : []).filter((p) => p && typeof p.name === 'string' && p.name.trim()).slice(0, 500)
+    if (!people.length) return
+    const ul = el('ul', { className: 'supporters' })
+    for (const p of people) {
+      const li = el('li')
+      const name = p.name.trim().slice(0, 80)
+      let link = null
+      try {
+        const u = new URL(p.link)
+        if (u.protocol === 'https:') link = u.href
+      } catch {}
+      li.append(link ? el('a', { href: link, target: '_blank', rel: 'noopener noreferrer nofollow', textContent: name }) : name)
+      if (typeof p.tier === 'string' && p.tier.trim()) li.append(' ', el('span', { className: 'muted small', textContent: p.tier.trim().slice(0, 40) }))
+      ul.append(li)
+    }
+    $('supporters').replaceChildren(ul)
+  } catch {
+    // Keep the "Be the first supporter" line.
+  }
 }
 
 // ---------- shared ----------
@@ -457,6 +514,8 @@ function init() {
   $('start').addEventListener('click', start)
   $('retry').addEventListener('click', start)
   $('stop').addEventListener('click', () => state.abort?.abort())
+  $('thanks-close').addEventListener('click', dismissThanks)
+  loadSupporters()
   $('reformat').addEventListener('click', () => {
     // Back to the stick step with the reformat steps open; the stick has to be chosen again afterwards.
     state.stick = null
@@ -497,6 +556,21 @@ function init() {
     })
   }
   refresh()
+}
+
+// Local development only. Add ?demo=done to the address to see the finished screen and the
+// thank-you panel without writing a stick, and &reset=1 to forget an earlier "Not now".
+if (location.hostname === 'localhost' && params.get('demo') === 'done') {
+  if (params.get('reset')) {
+    try {
+      localStorage.removeItem(THANKS_KEY)
+    } catch {}
+  }
+  showDone([
+    ['Written to', 'DEMO STICK'],
+    ['What was written', '979 files, 9.0 GB'],
+    ['Time taken', '6 minutes'],
+  ])
 }
 
 // Local development only: lets a test hand Project mkstick a file without the file dialog.

@@ -2,6 +2,12 @@
 
 Full documentation: [docs/PROJECT.md](docs/PROJECT.md).
 
+## Support this project
+
+[![Sponsor on GitHub](https://img.shields.io/github/sponsors/conanzhangtech?label=Sponsor&logo=githubsponsors)](https://github.com/sponsors/conanzhangtech)
+
+Project mkstick is free, has no adverts and is built by one person in his own time. If it saved you time, you can support it through [GitHub Sponsors](https://github.com/sponsors/conanzhangtech), [Ko-fi](https://ko-fi.com/YOUR_KOFI_HANDLE) or [PayPal](https://paypal.me/conanzhangtech). Other ways to give, including crypto, are on the [support page](https://mkstick.czt.sh/#support).
+
 Makes a bootable Windows or Linux USB stick from a web page. No app to install. Free and open source under the MIT licence.
 
 Site: https://mkstick.czt.sh
@@ -33,6 +39,9 @@ Write-up: https://czt.sh/projects/mkstick
 | `jobs/` | Scheduled job that fetches Windows download links from Microsoft |
 | `docs/PROJECT.md` | Full project documentation |
 | `test/security-check.mjs` | Checks a running site against the security rules |
+| `public/supporters.json` | The names on the supporters wall, edited by hand |
+| `public/qr/`, `tools/make-qr.mjs` | QR codes for the donation addresses, and the script that draws and checks them |
+| `.github/FUNDING.yml` | Turns on the Sponsor button on GitHub |
 | `test/flash-cli.mjs` | Runs the same engine from the command line |
 | `test/proof/` | Screenshots of sticks made by the engine starting in a virtual PC |
 

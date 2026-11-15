@@ -295,14 +295,16 @@ function cleanFragment(html) {
 
 async function siteFrame(ctx) {
   try {
-    return await cached(ctx, 'frame-v1', 3600, async () => {
+    return await cached(ctx, 'frame-v2', 3600, async () => {
       const res = await fetch(`${MAIN_SITE}/`, { headers: { accept: 'text/html' } })
       if (!res.ok) throw new Error('main site unavailable')
       const html = (await res.text()).slice(0, 600000)
       const header = /<header class="site-header"[\s\S]*?<\/header>/.exec(html)?.[0]
       const footer = /<footer class="site-footer[\s\S]*?<\/footer>/.exec(html)?.[0]
       if (!header || !footer || header.length > 40000 || footer.length > 40000) throw new Error('frame not found')
-      return { header: cleanFragment(header), footer: cleanFragment(footer) }
+      // The footer is the main site's, plus one quiet link of Project mkstick's own.
+      const support = '<p class="container p-foot-base p-foot-support"><a href="#support">Support Project mkstick</a></p>'
+      return { header: cleanFragment(header), footer: cleanFragment(footer).replace(/<\/footer>\s*$/, `${support}</footer>`) }
     })
   } catch {
     return null

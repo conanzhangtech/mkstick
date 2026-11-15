@@ -1,4 +1,5 @@
 # Fetches official Windows download links from Microsoft every six hours and hands them to the site.
+# The logs show file names only, never the links or the secret.
 # Needs two repository secrets: MKSTICK_URL (the site) and MKSTICK_TOKEN (the Worker's LINKS_TOKEN).
 name: windows-links
 on:

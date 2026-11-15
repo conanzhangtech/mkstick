@@ -1,0 +1,34 @@
+# Fetches official Windows download links from Microsoft every six hours and hands them to the site.
+# Needs two repository secrets: MKSTICK_URL (the site) and MKSTICK_TOKEN (the Worker's LINKS_TOKEN).
+name: windows-links
+on:
+  schedule:
+    - cron: "17 */6 * * *"
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: windows-links
+  cancel-in-progress: false
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { product: win11, arch: x64 }
+          - { product: win11, arch: arm64 }
+          - { product: win10, arch: x64 }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node jobs/fetch-links.mjs
+        env:
+          MKSTICK_URL: ${{ secrets.MKSTICK_URL }}
+          MKSTICK_TOKEN: ${{ secrets.MKSTICK_TOKEN }}
+          PRODUCT: ${{ matrix.product }}
+          ARCH: ${{ matrix.arch }}

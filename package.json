@@ -1,0 +1,10 @@
+{
+  "name": "mkstick-czt-sh",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --port 8794",
+    "deploy": "wrangler deploy",
+    "flash": "node test/flash-cli.mjs"
+  }
+}

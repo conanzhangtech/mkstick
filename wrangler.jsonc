@@ -1,0 +1,28 @@
+{
+  // mkstick: makes bootable USB sticks from a web page. Stores no disc images.
+  "$schema": "../node_modules/wrangler/config-schema.json",
+  "name": "mkstick-staging",
+  "main": "src/index.js",
+  "compatibility_date": "2026-10-01",
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": "public",
+    "binding": "ASSETS",
+    // Every request passes through the Worker, so every answer carries the security headers.
+    "run_worker_first": true
+  },
+  // Limits per visitor address, per minute.
+  "ratelimits": [
+    { "name": "API_LIMIT", "namespace_id": "7101", "simple": { "limit": 60, "period": 60 } },
+    { "name": "MIRROR_LIMIT", "namespace_id": "7102", "simple": { "limit": 600, "period": 60 } },
+    { "name": "WRITE_LIMIT", "namespace_id": "7103", "simple": { "limit": 10, "period": 60 } }
+  ],
+  // Windows download links, written by the scheduled job in jobs/ and kept for 23 hours.
+  // The job's secret is LINKS_TOKEN: set it with `wrangler secret put LINKS_TOKEN`.
+  "kv_namespaces": [{ "binding": "LINKS", "id": "aef94e050a504968bcb8811b86373362" }],
+  "dev": { "host": "localhost" },
+  // Only the custom domain: no *.workers.dev address or preview URLs.
+  "workers_dev": false,
+  "preview_urls": false,
+  "routes": [{ "pattern": "staging.mkstick.czt.sh", "custom_domain": true }]
+}

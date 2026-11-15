@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en-GB">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Project mkstick · Conan Zhang</title>
+    <meta name="description" content="Project mkstick puts a Windows or Linux installer on a USB stick from a web page, with nothing to install. Free and open source." />
+    <meta name="robots" content="noindex" />
+    <meta name="theme-color" content="#0b6b52" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="preload" href="/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+  <body>
+    <a class="skip" href="#tool">Skip to the tool</a>
+    <header class="site-header">
+      <div class="container header-inner">
+        <a href="https://czt.sh/" class="brand">Conan Zhang</a>
+        <nav aria-label="Main" id="site-nav">
+          <ul>
+            <li><a href="https://czt.sh/projects">Projects</a></li>
+            <li><a href="https://czt.sh/happenings">Happenings</a></li>
+            <li><a href="https://czt.sh/research">Research</a></li>
+            <li><a href="https://czt.sh/achievements">Achievements</a></li>
+            <li><a href="https://czt.sh/about">About</a></li>
+          </ul>
+        </nav>
+        <ul class="t-social" aria-label="Profiles"><li><a href="https://github.com/conanzhangtech" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"></path></svg></a></li><li><a href="https://www.linkedin.com/in/conanzhangtech/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"></path></svg></a></li><li><a href="https://www.instagram.com/conanzhangtech" target="_blank" rel="noopener noreferrer" aria-label="Instagram" title="Instagram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7.0301.084c-1.2768.0602-2.1487.264-2.911.5634-.7888.3075-1.4575.72-2.1228 1.3877-.6652.6677-1.075 1.3368-1.3802 2.127-.2954.7638-.4956 1.6365-.552 2.914-.0564 1.2775-.0689 1.6882-.0626 4.947.0062 3.2586.0206 3.6671.0825 4.9473.061 1.2765.264 2.1482.5635 2.9107.308.7889.72 1.4573 1.388 2.1228.6679.6655 1.3365 1.0743 2.1285 1.38.7632.295 1.6361.4961 2.9134.552 1.2773.056 1.6884.069 4.9462.0627 3.2578-.0062 3.668-.0207 4.9478-.0814 1.28-.0607 2.147-.2652 2.9098-.5633.7889-.3086 1.4578-.72 2.1228-1.3881.665-.6682 1.0745-1.3378 1.3795-2.1284.2957-.7632.4966-1.636.552-2.9124.056-1.2809.0692-1.6898.063-4.948-.0063-3.2583-.021-3.6668-.0817-4.9465-.0607-1.2797-.264-2.1487-.5633-2.9117-.3084-.7889-.72-1.4568-1.3876-2.1228C21.2982 1.33 20.628.9208 19.8378.6165 19.074.321 18.2017.1197 16.9244.0645 15.6471.0093 15.236-.005 11.977.0014 8.718.0076 8.31.0215 7.0301.0839m.1402 21.6932c-1.17-.0509-1.8053-.2453-2.2287-.408-.5606-.216-.96-.4771-1.3819-.895-.422-.4178-.6811-.8186-.9-1.378-.1644-.4234-.3624-1.058-.4171-2.228-.0595-1.2645-.072-1.6442-.079-4.848-.007-3.2037.0053-3.583.0607-4.848.05-1.169.2456-1.805.408-2.2282.216-.5613.4762-.96.895-1.3816.4188-.4217.8184-.6814 1.3783-.9003.423-.1651 1.0575-.3614 2.227-.4171 1.2655-.06 1.6447-.072 4.848-.079 3.2033-.007 3.5835.005 4.8495.0608 1.169.0508 1.8053.2445 2.228.408.5608.216.96.4754 1.3816.895.4217.4194.6816.8176.9005 1.3787.1653.4217.3617 1.056.4169 2.2263.0602 1.2655.0739 1.645.0796 4.848.0058 3.203-.0055 3.5834-.061 4.848-.051 1.17-.245 1.8055-.408 2.2294-.216.5604-.4763.96-.8954 1.3814-.419.4215-.8181.6811-1.3783.9-.4224.1649-1.0577.3617-2.2262.4174-1.2656.0595-1.6448.072-4.8493.079-3.2045.007-3.5825-.006-4.848-.0608M16.953 5.5864A1.44 1.44 0 1 0 18.39 4.144a1.44 1.44 0 0 0-1.437 1.4424M5.8385 12.012c.0067 3.4032 2.7706 6.1557 6.173 6.1493 3.4026-.0065 6.157-2.7701 6.1506-6.1733-.0065-3.4032-2.771-6.1565-6.174-6.1498-3.403.0067-6.156 2.771-6.1496 6.1738M8 12.0077a4 4 0 1 1 4.008 3.9921A3.9996 3.9996 0 0 1 8 12.0077"></path></svg></a></li><li><a href="https://t.me/conanzhangtech" target="_blank" rel="noopener noreferrer" aria-label="Telegram" title="Telegram"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"></path></svg></a></li></ul>
+        <a class="p-cta" href="https://conanzhangtech.cloudflareaccess.com" target="_blank" rel="noopener noreferrer">Lab login</a>
+        <button class="t-menu-btn" type="button" data-menu="true" aria-expanded="false" aria-controls="site-nav" aria-label="Menu"><i></i><i></i></button>
+      </div>
+    </header>
+
+    <main>
+      <div class="product-bar">
+        <div class="container product-inner">
+          <a class="product-name" href="/"><svg class="mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="6" fill="#0b6b52"/><rect x="11" y="4" width="10" height="7" fill="#ffd23f"/><rect x="8" y="11" width="16" height="17" rx="2" fill="#fff"/></svg><span>Project mkstick</span></a>
+          <nav aria-label="Project mkstick sections">
+            <a href="#tool">Make a stick</a>
+            <a href="#how">How it works</a>
+            <a href="#support">Support</a>
+            <a href="https://czt.sh/projects/mkstick">Documentation</a>
+            <a href="https://github.com/conanzhangtech/mkstick" target="_blank" rel="noopener noreferrer">GitHub</a>
+          </nav>
+        </div>
+      </div>
+
+      <section class="product-hero">
+        <div class="container hero">
+          <div class="hero-text">
+            <h1>Make a bootable USB stick from your browser</h1>
+            <p class="lede">Project mkstick puts a Windows or Linux installer on a USB stick with nothing to install. It does the job of an app like Rufus and works the same way on Windows, Mac and Linux.</p>
+            <p class="cta"><a class="btn sun" href="#tool">Make a stick</a> <a class="btn onjade" href="#how">How it works</a></p>
+            <p class="latest">Free and open source, by Conan Zhang.</p>
+            <p class="hashtag">#projectmkstickbycztsh</p>
+          </div>
+          <svg class="hero-art" viewBox="0 0 360 240" role="img" aria-label="A USB stick">
+            <rect x="40" y="70" width="210" height="100" rx="12" fill="#fff"/>
+            <rect x="250" y="88" width="70" height="64" fill="#ffd23f"/>
+            <rect x="272" y="102" width="14" height="14" fill="#0b6b52"/>
+            <rect x="272" y="124" width="14" height="14" fill="#0b6b52"/>
+            <rect x="64" y="94" width="96" height="10" rx="2" fill="#0b6b52"/>
+            <rect x="64" y="114" width="150" height="6" rx="2" fill="#d3ded8"/>
+            <rect x="64" y="128" width="150" height="6" rx="2" fill="#d3ded8"/>
+            <rect x="64" y="142" width="84" height="6" rx="2" fill="#d3ded8"/>
+          </svg>
+        </div>
+      </section>
+
+      <div class="container">
+      <ul class="need" aria-label="What you need">
+        <li><b>A USB stick</b> of 8 GB or more, or 16 GB for Windows</li>
+        <li><b>Chrome or Edge</b> on a computer</li>
+        <li><b>About ten minutes</b> for most installers</li>
+      </ul>
+
+
+      <div id="unsupported" class="notice" hidden>
+        <p><strong>This browser can't write to a USB stick.</strong> Safari, Firefox and phone browsers don't allow a web page to save files to a drive, so please open Project mkstick in Chrome or Edge on a computer. You can still click through the steps here to see how it works.</p>
+      </div>
+
+      <ol class="steps" id="tool">
+        <li class="step" id="step-what">
+          <h2>Pick a system</h2>
+          <p class="sumline"><span id="sum-what"></span> <button class="linkbtn change" data-step="step-what">Change</button></p>
+          <div class="body">
+            <div id="catalogue" class="rows" role="radiogroup" aria-label="System to install">
+              <p class="muted">Loading the list…</p>
+            </div>
+          </div>
+        </li>
+
+        <li class="step" id="step-files">
+          <h2>Get the installer</h2>
+          <p class="sumline"><span id="sum-files"></span> <button class="linkbtn change" data-step="step-files">Change</button></p>
+          <div class="body">
+            <div id="files-windows" hidden>
+              <p>Windows comes from Microsoft and not from Project mkstick, so your browser downloads it from Microsoft and you then show Project mkstick where the file is.</p>
+              <h3>First, download Windows</h3>
+              <div id="win-direct" hidden>
+                <div class="fields">
+                  <label>Language
+                    <select id="win-lang"></select>
+                  </label>
+                  <label id="win-arch-wrap">Processor
+                    <select id="win-arch"></select>
+                  </label>
+                </div>
+                <p class="muted small" id="win-bits"></p>
+                <p><button class="btn" id="win-download">Download from Microsoft</button></p>
+                <p id="win-status" class="status" role="status"></p>
+                <p class="muted small">If your language isn't in the list, or you'd rather fetch it yourself, you can use <a id="win-page-alt" href="https://www.microsoft.com/software-download/windows11" target="_blank" rel="noopener noreferrer">Microsoft's download page</a> and get the same file there.</p>
+              </div>
+              <ol class="howto" id="win-manual">
+                <li><a class="btn" id="win-page" href="https://www.microsoft.com/software-download/windows11" target="_blank" rel="noopener noreferrer">Open Microsoft's download page</a></li>
+                <li id="win-how"></li>
+                <li>When the download has finished, come back here and choose the file below.</li>
+              </ol>
+              <h3>Then choose the file you downloaded</h3>
+            </div>
+
+            <div id="files-linux" hidden>
+              <p id="linux-text"></p>
+            </div>
+
+            <div id="files-pick" hidden>
+              <label class="drop" id="drop">
+                <input type="file" id="file" accept=".iso,application/x-iso9660-image" />
+                <span id="drop-text">Choose the ISO file, or drag it here</span>
+              </label>
+              <p class="muted small">Project mkstick reads the file where it is on your computer and doesn't upload it anywhere.</p>
+            </div>
+            <p id="image-status" class="status" role="status"></p>
+          </div>
+        </li>
+
+        <li class="step" id="step-stick">
+          <h2>Choose your stick</h2>
+          <p class="sumline"><span id="sum-stick"></span> <button class="linkbtn change" data-step="step-stick">Change</button></p>
+          <div class="body">
+            <p>Plug the stick in and press the button below. A window opens showing your drives, where you click the stick in the list on the left and then press Select. Your browser will ask whether Project mkstick may edit files on it, and you need to allow that.</p>
+            <p><button class="btn primary" id="pick-stick">Choose USB stick</button></p>
+            <p id="stick-status" class="status" role="status"></p>
+            <p class="muted small">The stick has to be empty and in FAT32 format, which most sticks of 32 GB or less already are. Project mkstick only adds files and has no way to delete what is on a drive.</p>
+            <details class="help">
+              <summary>My stick isn't empty, or isn't FAT32</summary>
+              <p>Formatting the stick fixes both, but it erases everything on the stick, so copy off anything you want to keep first. A web page isn't able to format a drive, which is why this part is done by you. If the stick was giving errors, eject it, unplug it and plug it back in before you start.</p>
+              <div class="tabs" role="tablist" aria-label="Your computer">
+                <button role="tab" data-os="windows" aria-selected="false">Windows</button>
+                <button role="tab" data-os="mac" aria-selected="false">Mac</button>
+                <button role="tab" data-os="linux" aria-selected="false">Linux</button>
+              </div>
+              <div class="tabpanel" data-os="windows" hidden>
+                <ol>
+                  <li>Open File Explorer, right-click the stick and choose <b>Format</b>.</li>
+                  <li>Set the file system to <b>FAT32</b> and press <b>Start</b>.</li>
+                  <li>If FAT32 isn't in the list, which happens with sticks over 32 GB, open Command Prompt and run the line below with <code>E:</code> changed to your stick's letter. This needs Windows 11 version 24H2 or later.</li>
+                </ol>
+                <pre><code>format E: /FS:FAT32 /Q</code></pre>
+              </div>
+              <div class="tabpanel" data-os="mac" hidden>
+                <ol>
+                  <li>Open <b>Disk Utility</b> and choose <b>Show All Devices</b> from the View menu.</li>
+                  <li>Select the stick itself, which is the top entry rather than the volume beneath it, and press <b>Erase</b>.</li>
+                  <li>Set the format to <b>MS-DOS (FAT)</b> and the scheme to <b>Master Boot Record</b>, then press Erase.</li>
+                </ol>
+              </div>
+              <div class="tabpanel" data-os="linux" hidden>
+                <ol>
+                  <li>Open <b>Disks</b>, select the stick and choose <b>Format Disk</b> with MBR partitioning.</li>
+                  <li>Add a single partition of type <b>FAT</b>.</li>
+                  <li>If you prefer a terminal, run the line below with <code>sdX1</code> changed to your stick's partition.</li>
+                </ol>
+                <pre><code>sudo mkfs.vfat -F 32 /dev/sdX1</code></pre>
+              </div>
+            </details>
+            <p class="muted small">Just having a look? <button class="linkbtn" id="pick-test">Try it with a test folder</button> instead of a real stick.</p>
+          </div>
+        </li>
+
+        <li class="step" id="step-write">
+          <h2>Write it</h2>
+          <p class="sumline"><span id="sum-write"></span></p>
+          <div class="body">
+            <p id="write-plan"></p>
+            <p><button class="btn primary" id="start" disabled>Write to the stick</button>
+              <button class="btn" id="stop" hidden>Stop</button></p>
+            <div id="progress" hidden>
+              <progress id="bar" max="1" value="0"></progress>
+              <p id="progress-text" class="status" role="status"></p>
+              <p id="progress-file" class="muted file"></p>
+              <p class="notice warn" role="note"><strong>Please let this finish.</strong> Don't refresh or close this page and don't unplug the stick until Project mkstick says the stick is ready, because stopping part-way leaves a stick that won't start a PC. If you want to make a second stick in the meantime, open Project mkstick in a new tab and use a different stick there.</p>
+            </div>
+            <div id="error" class="notice" hidden>
+              <p id="error-text" class="status bad"></p>
+              <p><button class="btn" id="retry">Try again</button> <button class="btn" id="reformat" hidden>Show me how to reformat</button></p>
+              <p class="muted small">Trying again picks up from the last file Project mkstick finished.</p>
+            </div>
+          </div>
+        </li>
+      </ol>
+
+      <section class="block done" id="done" hidden>
+        <h2>Your stick is ready</h2>
+        <ul id="done-facts" class="summary"></ul>
+        <h3>Starting a PC from it</h3>
+        <p>Eject the stick before you unplug it. Then plug it into the PC, switch the PC on and press its boot menu key straight away, before Windows starts. Choose the stick from the menu, and if it appears twice, choose the entry marked UEFI.</p>
+        <table class="keys">
+          <caption>The boot menu key depends on who made the PC</caption>
+          <thead><tr><th>Maker</th><th>Key</th></tr></thead>
+          <tbody>
+            <tr><td>Dell</td><td>F12</td></tr>
+            <tr><td>HP</td><td>F9 or Esc</td></tr>
+            <tr><td>Lenovo</td><td>F12</td></tr>
+            <tr><td>Asus</td><td>F8 or Esc</td></tr>
+            <tr><td>Acer</td><td>F12</td></tr>
+            <tr><td>MSI</td><td>F11</td></tr>
+          </tbody>
+        </table>
+        <p class="muted small">The stick starts PCs that use UEFI, which covers nearly every PC made since 2012.</p>
+        <p>If Project mkstick helped you, post your stick on Instagram, tag <a href="https://www.instagram.com/conanzhangtech" target="_blank" rel="noopener noreferrer">@conanzhangtech</a> and add <b>#projectmkstickbycztsh</b>. You're also welcome to <a href="#support">support the project</a>.</p>
+      </section>
+
+      <section class="block" id="how">
+        <h2>How it works</h2>
+        <p>A modern PC can start from a USB stick that simply holds the installer's files, as long as the stick is in FAT32 format. Project mkstick opens the installer's disc image and copies each file across. Windows includes one file that is too big for FAT32, so Project mkstick splits it into parts that Windows Setup puts back together by itself.</p>
+        <p>Windows comes from Microsoft through your own browser, while Ubuntu and Debian are fetched from their publishers and checked against the checksums they publish. Project mkstick keeps no copies of any of them.</p>
+        <p>The <a href="https://czt.sh/projects/mkstick">full documentation</a> is on czt.sh, and the <a href="https://github.com/conanzhangtech/mkstick" target="_blank" rel="noopener noreferrer">source code</a> is on GitHub.</p>
+        <h3>Is it safe?</h3>
+        <p>Project mkstick can only add files to the folder you point it at, because a web page has no way to format or erase a drive, and it refuses to write to a folder that already has things in it. The installer file you choose is read on your own computer and never sent anywhere. The code is open source, so anyone can check all of this.</p>
+        <h3>What it can't do</h3>
+        <p>It needs Chrome or Edge on a computer, since other browsers don't let a page write to a drive. The sticks it makes start UEFI PCs, which leaves out some machines from before 2012, and it can't make Mac installers.</p>
+      </section>
+
+      <section class="block" id="support">
+        <h2>Support Project mkstick</h2>
+        <p>Project mkstick is free and carries no adverts. If it saved you some time and you'd like to say thanks, a small donation helps keep it online.</p>
+        <ul class="give">
+          <li>
+            <span class="k">PayPal</span>
+            <a href="https://www.paypal.me/conanzhangtech" target="_blank" rel="noopener noreferrer">paypal.me/conanzhangtech</a>
+          </li>
+          <li>
+            <span class="k">USDT on Ethereum (ERC-20)</span>
+            <code id="addr-erc20">0x8Cc894EED2c98BEFB42477fd15868f59fa7D9C16</code>
+            <button class="btn small" data-copy="addr-erc20">Copy</button>
+          </li>
+          <li>
+            <span class="k">USDT on Tron (TRC-20)</span>
+            <code id="addr-trc20">TGHTXkjC8CpdLHF5g2m2RVsZ5QgzhyDWFi</code>
+            <button class="btn small" data-copy="addr-trc20">Copy</button>
+          </li>
+        </ul>
+        <p>A post helps as much as a donation. If Project mkstick helped you, tag <a href="https://www.instagram.com/conanzhangtech" target="_blank" rel="noopener noreferrer">@conanzhangtech</a> on Instagram and add <b>#projectmkstickbycztsh</b>, so other people can find it.</p>
+        <p class="muted small">Please send USDT only on the network named beside each address, because coins sent on another network can't be recovered. It's worth checking the first and last few characters after you paste.</p>
+      </section>
+      <p class="legal">Project mkstick is open source under the MIT licence. Windows is a trade mark of Microsoft, Ubuntu of Canonical and Debian of Software in the Public Interest, and Project mkstick isn't connected with any of them.</p>
+      </div>
+    </main>
+
+    <footer class="site-footer p-foot">
+      <div class="container p-foot-row">
+        <p>Conan Zhang. Cybersecurity, side projects and community work in Singapore.</p>
+        <ul class="p-foot-links">
+          <li><a href="https://czt.sh/contact">Say hello</a></li>
+          <li><a href="https://github.com/conanzhangtech" rel="noopener noreferrer" target="_blank">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/conanzhangtech/" rel="noopener noreferrer" target="_blank">LinkedIn</a></li>
+          <li><a href="https://www.instagram.com/conanzhangtech" rel="noopener noreferrer" target="_blank">Instagram</a></li>
+          <li><a href="https://t.me/conanzhangtech" rel="noopener noreferrer" target="_blank">Telegram</a></li>
+        </ul>
+      </div>
+      <p class="container p-foot-base">© 2026 Conan Zhang</p>
+    </footer>
+
+    <script src="/vendor/sha256.umd.min.js"></script>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

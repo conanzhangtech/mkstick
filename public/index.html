@@ -3,10 +3,27 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Project mkstick · Conan Zhang</title>
-    <meta name="description" content="Project mkstick puts a Windows or Linux installer on a USB stick from a web page, with nothing to install. Free and open source." />
-        <meta name="theme-color" content="#0b6b52" />
+    <title>Make a bootable USB stick in your browser | Project mkstick</title>
+    <meta name="description" content="Free, open-source tool to make a bootable Windows 11, Windows 10, Ubuntu or Debian USB stick from your browser. Nothing to install." />
+    <meta name="author" content="Conan Zhang" />
+    <link rel="canonical" href="https://mkstick.czt.sh/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Project mkstick" />
+    <meta property="og:title" content="Make a bootable USB stick in your browser" />
+    <meta property="og:description" content="Free, open-source tool to make a bootable Windows 11, Windows 10, Ubuntu or Debian USB stick from your browser. Nothing to install." />
+    <meta property="og:url" content="https://mkstick.czt.sh/" />
+    <meta property="og:image" content="https://mkstick.czt.sh/share.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Project mkstick: make a bootable USB stick from your browser" />
+    <meta property="og:locale" content="en_GB" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "WebApplication", "name": "Project mkstick", "alternateName": "mkstick", "url": "https://mkstick.czt.sh/", "description": "Free, open-source tool to make a bootable Windows 11, Windows 10, Ubuntu or Debian USB stick from your browser. Nothing to install.", "applicationCategory": "UtilitiesApplication", "operatingSystem": "Windows, macOS, Linux", "browserRequirements": "Requires Chrome or Edge on a computer", "isAccessibleForFree": true, "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "license": "https://opensource.org/license/mit", "image": "https://mkstick.czt.sh/share.png", "author": {"@type": "Person", "name": "Conan Zhang", "url": "https://czt.sh/"}, "sameAs": ["https://github.com/conanzhangtech/mkstick", "https://czt.sh/projects/mkstick"]}</script>
+    <script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Can I make a Windows 11 bootable USB on a Mac?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Open Project mkstick in Chrome or Edge on the Mac, download the Windows 11 ISO from Microsoft through the page, and it writes the installer to your stick. You don't need Boot Camp, a terminal or any extra software."}}, {"@type": "Question", "name": "Do I need Rufus, balenaEtcher or any other app?", "acceptedAnswer": {"@type": "Answer", "text": "No. Project mkstick runs in the browser and does the same job, so there is nothing to download or install apart from the Windows or Linux image itself."}}, {"@type": "Question", "name": "Is it free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Project mkstick is free to use, has no adverts and is open source under the MIT licence."}}, {"@type": "Question", "name": "Which systems can it put on a stick?", "acceptedAnswer": {"@type": "Answer", "text": "Windows 11 for Intel, AMD and Arm PCs, Windows 10, Ubuntu Desktop and Server 24.04, and the Debian network installer. It can also write most other Windows or Linux installers from an ISO file you already have."}}, {"@type": "Question", "name": "Why does the stick have to be FAT32?", "acceptedAnswer": {"@type": "Answer", "text": "A PC's firmware can only start from a format it can read, and FAT32 is the one every UEFI PC understands. Most sticks of 32 GB or less are already FAT32, and the page shows how to format a larger one."}}, {"@type": "Question", "name": "Will the stick work on my PC?", "acceptedAnswer": {"@type": "Answer", "text": "It works on PCs that start with UEFI, which covers nearly every PC made since 2012. Very old machines that only have a legacy BIOS won't start from it."}}, {"@type": "Question", "name": "Does it work in Safari or Firefox, or on a phone?", "acceptedAnswer": {"@type": "Answer", "text": "Not yet. Only Chrome and Edge on a computer let a web page save files to a drive, so those are the browsers to use."}}]}</script>
+    <meta name="theme-color" content="#0b6b52" />
     <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/icon-192.png" />
     <link rel="preload" href="/fonts/schibsted-grotesk.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="/style.css" />
   </head>
@@ -37,6 +54,7 @@
           <nav aria-label="Project mkstick sections">
             <a href="#tool">Make a stick</a>
             <a href="#how">How it works</a>
+            <a href="#questions">Questions</a>
             <a href="#support">Support</a>
             <a href="https://czt.sh/projects/mkstick">Documentation</a>
             <a href="https://github.com/conanzhangtech/mkstick" target="_blank" rel="noopener noreferrer">GitHub</a>
@@ -229,6 +247,24 @@
         <p>Project mkstick can only add files to the folder you point it at, because a web page has no way to format or erase a drive, and it refuses to write to a folder that already has things in it. The installer file you choose is read on your own computer and never sent anywhere. The code is open source, so anyone can check all of this.</p>
         <h3>What it can't do</h3>
         <p>It needs Chrome or Edge on a computer, since other browsers don't let a page write to a drive. The sticks it makes start UEFI PCs, which leaves out some machines from before 2012, and it can't make Mac installers.</p>
+      </section>
+
+      <section class="block" id="questions">
+        <h2>Questions</h2>
+        <h3>Can I make a Windows 11 bootable USB on a Mac?</h3>
+        <p>Yes. Open Project mkstick in Chrome or Edge on the Mac, download the Windows 11 ISO from Microsoft through the page, and it writes the installer to your stick. You don't need Boot Camp, a terminal or any extra software.</p>
+        <h3>Do I need Rufus, balenaEtcher or any other app?</h3>
+        <p>No. Project mkstick runs in the browser and does the same job, so there is nothing to download or install apart from the Windows or Linux image itself.</p>
+        <h3>Is it free?</h3>
+        <p>Yes. Project mkstick is free to use, has no adverts and is open source under the MIT licence.</p>
+        <h3>Which systems can it put on a stick?</h3>
+        <p>Windows 11 for Intel, AMD and Arm PCs, Windows 10, Ubuntu Desktop and Server 24.04, and the Debian network installer. It can also write most other Windows or Linux installers from an ISO file you already have.</p>
+        <h3>Why does the stick have to be FAT32?</h3>
+        <p>A PC's firmware can only start from a format it can read, and FAT32 is the one every UEFI PC understands. Most sticks of 32 GB or less are already FAT32, and the page shows how to format a larger one.</p>
+        <h3>Will the stick work on my PC?</h3>
+        <p>It works on PCs that start with UEFI, which covers nearly every PC made since 2012. Very old machines that only have a legacy BIOS won't start from it.</p>
+        <h3>Does it work in Safari or Firefox, or on a phone?</h3>
+        <p>Not yet. Only Chrome and Edge on a computer let a web page save files to a drive, so those are the browsers to use.</p>
       </section>
 
       <section class="block" id="support">

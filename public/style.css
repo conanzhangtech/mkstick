@@ -57,7 +57,7 @@ a:hover { color: var(--jade-dark); }
 /* mkstick's own bar and introduction. The frame above and below is czt.sh's; this part is the product's. */
 .product-bar { border-bottom: 1px solid var(--line); background: #fff; }
 .product-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; min-height: 60px; }
-.product-name { display: inline-flex; align-items: center; gap: 10px; font-size: 1.3rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); text-decoration: none; }
+.product-name { white-space: nowrap; display: inline-flex; align-items: center; gap: 10px; font-size: 1.3rem; font-weight: 800; letter-spacing: -0.03em; color: var(--text); text-decoration: none; }
 .product-name:hover { color: var(--text); }
 .mark { width: 30px; height: 30px; flex: none; }
 .product-bar nav { display: flex; gap: clamp(14px, 3vw, 28px); }
@@ -209,6 +209,9 @@ progress { width: 100%; max-width: var(--measure); height: 14px; accent-color: v
 @media (max-width: 1040px) {
   .t-social { display: none; }
 }
+@media (max-width: 960px) {
+  .product-bar nav a:nth-child(-n+2) { display: none; }
+}
 @media (max-width: 860px) {
   .t-menu-btn { display: flex; }
   .p-cta { display: none; }
@@ -225,7 +228,7 @@ progress { width: 100%; max-width: var(--measure); height: 14px; accent-color: v
 }
 @media (max-width: 560px) {
   body { font-size: 16px; }
-  .product-bar nav a:nth-child(-n+3) { display: none; }
+  .product-bar nav a:nth-child(-n+4) { display: none; }
   .product-name { font-size: 1.1rem; }
   .step { padding-left: 42px; }
   .row { flex-wrap: wrap; }

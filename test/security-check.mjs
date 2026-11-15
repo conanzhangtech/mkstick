@@ -37,10 +37,12 @@ check('no cookies are set', !h.get('set-cookie'))
 check('no CORS header is sent', !h.get('access-control-allow-origin'))
 
 // --- the page itself
-check('no inline scripts', !/<script(?![^>]*\bsrc=)[^>]*>/i.test(html))
+// Search-engine data blocks (application/ld+json) are data, not code, and are allowed.
+check('no inline scripts', !/<script(?![^>]*\bsrc=)(?![^>]*type="application\/ld\+json")[^>]*>/i.test(html))
 check('no inline event handlers', !/\son[a-z]+\s*=/i.test(html))
 check('no inline styles', !/\sstyle\s*=/i.test(html) && !/<style/i.test(html))
-const outside = [...html.matchAll(/<(?:script|link|img|iframe)[^>]+(?:src|href)="(https?:\/\/[^"]+)"/gi)].map((m) => m[1])
+// A canonical link names an address and loads nothing, so it does not count.
+const outside = [...html.matchAll(/<(?:script|link|img|iframe)(?![^>]*rel="canonical")[^>]+(?:src|href)="(https?:\/\/[^"]+)"/gi)].map((m) => m[1])
 check('nothing is loaded from other sites', outside.length === 0, outside.join(', '))
 check('every new-tab link has rel=noopener', [...html.matchAll(/<a [^>]*target="_blank"[^>]*>/g)].every((m) => /rel="[^"]*noopener/.test(m[0])))
 

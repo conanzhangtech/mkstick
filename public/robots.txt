@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /mirror/
+
+Sitemap: https://mkstick.czt.sh/sitemap.xml

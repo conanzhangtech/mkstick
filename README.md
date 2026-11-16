@@ -1,31 +1,42 @@
 # Project mkstick
 
-User guide: [docs.open.czt.sh/projectmkstick](https://docs.open.czt.sh/projectmkstick/). Technical documentation: [docs/PROJECT.md](docs/PROJECT.md).
+[![Licence: MIT](https://img.shields.io/badge/licence-MIT-0b6b52)](LICENSE) [![Sponsor](https://img.shields.io/github/sponsors/conanzhangtech?label=Sponsor&logo=githubsponsors)](https://github.com/sponsors/conanzhangtech)
 
-## Support this project
+**Make a bootable Windows or Linux USB stick from a web page.** Nothing to install. It does the job of an app like Rufus, and works the same on Windows, Mac and Linux. Free and open source.
 
-Project mkstick is free, has no adverts and is built by one person in his own time. If it saved you time, you can say thanks:
+[**Open the site**](https://mkstick.czt.sh) · [User guide](https://docs.open.czt.sh/projectmkstick/) · [Technical docs](docs/PROJECT.md) · [Write-up](https://czt.sh/projects/mkstick)
 
-| Way to give | Link | Notes |
-| --- | --- | --- |
-| GitHub Sponsors | [github.com/sponsors/conanzhangtech](https://github.com/sponsors/conanzhangtech) | Monthly or one-off |
-| Ko-fi | [ko-fi.com/conanzhangtech](https://ko-fi.com/conanzhangtech) | A one-off tip, no account needed |
-| PayPal | [paypal.me/conanzhangtech](https://paypal.me/conanzhangtech) | Any amount |
+![Project mkstick home page](https://raw.githubusercontent.com/conanzhangtech/mkstick/main/docs/images/home.png)
 
-**Crypto (USDT).** Send only on the network named in the table. Coins sent on another network cannot be recovered. Check the first and last few characters of the address before you send.
+## How to use it
 
-| Network | Address | QR code |
-| --- | --- | --- |
-| Ethereum (ERC-20) | `0x8Cc894EED2c98BEFB42477fd15868f59fa7D9C16` | <img src="https://raw.githubusercontent.com/conanzhangtech/mkstick/main/public/qr/usdt-erc20.svg" width="96" alt="QR code for the Ethereum USDT address"> |
-| Tron (TRC-20) | `TGHTXkjC8CpdLHF5g2m2RVsZ5QgzhyDWFi` | <img src="https://raw.githubusercontent.com/conanzhangtech/mkstick/main/public/qr/usdt-trc20.svg" width="96" alt="QR code for the Tron USDT address"> |
+1. Open [mkstick.czt.sh](https://mkstick.czt.sh) in Chrome or Edge on a computer.
+2. Pick a system: Windows 11, Windows 10, Ubuntu, Debian, or your own ISO file.
+3. Plug in an empty FAT32 USB stick and choose it.
+4. Press the button. Wait until it says it is done, then start your PC from the stick.
 
-More ways to give are on the [support page](https://mkstick.czt.sh/#support). Starring the repository and telling a friend help too.
+## What it can make
 
-Makes a bootable Windows or Linux USB stick from a web page. No app to install. Free and open source under the MIT licence.
+| System | Where the installer comes from |
+| --- | --- |
+| Windows 11 and 10 | Microsoft. Your browser downloads the file, then you choose it. |
+| Ubuntu Desktop and Server | Ubuntu's own server, checked against its published checksum |
+| Debian | Debian's own server, checked against its published checksum |
+| Anything else | An ISO file you already have |
 
-Site: https://mkstick.czt.sh
+## Proof it works
 
-Write-up: https://czt.sh/projects/mkstick
+These are sticks made by the engine, started in a virtual PC.
+
+| Windows Setup | Windows editions found |
+| --- | --- |
+| ![Windows Setup starting](https://raw.githubusercontent.com/conanzhangtech/mkstick/main/test/proof/windows-setup.png) | ![Windows edition list](https://raw.githubusercontent.com/conanzhangtech/mkstick/main/test/proof/windows-edition-list.png) |
+
+| Debian installer | Ubuntu Server installer |
+| --- | --- |
+| ![Debian installer](https://raw.githubusercontent.com/conanzhangtech/mkstick/main/test/proof/debian-installer.png) | ![Ubuntu Server installer](https://raw.githubusercontent.com/conanzhangtech/mkstick/main/test/proof/ubuntu-server-installer.png) |
+
+On a phone: <img src="https://raw.githubusercontent.com/conanzhangtech/mkstick/main/docs/images/mobile.png" width="200" alt="The site on a phone" align="top">
 
 ## How it works
 
@@ -93,3 +104,28 @@ See [SECURITY.md](SECURITY.md). In short: a strict Content-Security-Policy, no t
 - The stick starts UEFI PCs only.
 - A Linux image with a single file over 4 GB cannot be written.
 - ESD and "solid" Windows images cannot be split.
+
+## Support
+
+Project mkstick is free and has no adverts. If it saved you time, you can say thanks:
+
+| Way to give | Link | Notes |
+| --- | --- | --- |
+| GitHub Sponsors | [github.com/sponsors/conanzhangtech](https://github.com/sponsors/conanzhangtech) | Monthly or one-off |
+| Ko-fi | [ko-fi.com/conanzhangtech](https://ko-fi.com/conanzhangtech) | A one-off tip, no account needed |
+| PayPal | [paypal.me/conanzhangtech](https://paypal.me/conanzhangtech) | Any amount |
+
+**Crypto (USDT).** Send only on the network named in the table. Coins sent on another network cannot be recovered. Check the first and last few characters of the address before you send.
+
+| Network | Address | QR code |
+| --- | --- | --- |
+| Ethereum (ERC-20) | `0x8Cc894EED2c98BEFB42477fd15868f59fa7D9C16` | <img src="https://raw.githubusercontent.com/conanzhangtech/mkstick/main/public/qr/usdt-erc20.svg" width="96" alt="QR code for the Ethereum USDT address"> |
+| Tron (TRC-20) | `TGHTXkjC8CpdLHF5g2m2RVsZ5QgzhyDWFi` | <img src="https://raw.githubusercontent.com/conanzhangtech/mkstick/main/public/qr/usdt-trc20.svg" width="96" alt="QR code for the Tron USDT address"> |
+
+More ways to give are on the [support page](https://mkstick.czt.sh/#support). Starring the repository and telling a friend help too.
+
+Makes a bootable Windows or Linux USB stick from a web page. No app to install. Free and open source under the MIT licence.
+
+Site: https://mkstick.czt.sh
+
+Write-up: https://czt.sh/projects/mkstick

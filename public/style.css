@@ -220,6 +220,8 @@ progress { width: 100%; max-width: var(--measure); height: 14px; accent-color: v
 .p-foot .p-foot-support { margin-top: 6px; }
 .p-foot-support a { color: var(--faint); }
 .p-foot-support a:hover { color: var(--text); }
+.p-foot-credit { margin-top: 6px; }
+.p-foot-credit a { color: var(--dim); font-weight: 600; }
 
 @media (max-width: 1040px) {
   .t-social { display: none; }

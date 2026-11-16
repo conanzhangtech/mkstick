@@ -1,12 +1,25 @@
 # Project mkstick
 
-Full documentation: [docs/PROJECT.md](docs/PROJECT.md).
+User guide: [docs.open.czt.sh/projectmkstick](https://docs.open.czt.sh/projectmkstick/). Technical documentation: [docs/PROJECT.md](docs/PROJECT.md).
 
 ## Support this project
 
-[![Sponsor on GitHub](https://img.shields.io/github/sponsors/conanzhangtech?label=Sponsor&logo=githubsponsors)](https://github.com/sponsors/conanzhangtech)
+Project mkstick is free, has no adverts and is built by one person in his own time. If it saved you time, you can say thanks:
 
-Project mkstick is free, has no adverts and is built by one person in his own time. If it saved you time, you can support it through [GitHub Sponsors](https://github.com/sponsors/conanzhangtech), [Ko-fi](https://ko-fi.com/YOUR_KOFI_HANDLE) or [PayPal](https://paypal.me/conanzhangtech). Other ways to give, including crypto, are on the [support page](https://mkstick.czt.sh/#support).
+| Way to give | Link | Notes |
+| --- | --- | --- |
+| GitHub Sponsors | [github.com/sponsors/conanzhangtech](https://github.com/sponsors/conanzhangtech) | Monthly or one-off |
+| Ko-fi | [ko-fi.com/conanzhangtech](https://ko-fi.com/conanzhangtech) | A one-off tip, no account needed |
+| PayPal | [paypal.me/conanzhangtech](https://paypal.me/conanzhangtech) | Any amount |
+
+**Crypto (USDT).** Send only on the network named in the table. Coins sent on another network cannot be recovered. Check the first and last few characters of the address before you send.
+
+| Network | Address | QR code |
+| --- | --- | --- |
+| Ethereum (ERC-20) | `0x8Cc894EED2c98BEFB42477fd15868f59fa7D9C16` | <img src="https://raw.githubusercontent.com/conanzhangtech/mkstick/main/public/qr/usdt-erc20.svg" width="96" alt="QR code for the Ethereum USDT address"> |
+| Tron (TRC-20) | `TGHTXkjC8CpdLHF5g2m2RVsZ5QgzhyDWFi` | <img src="https://raw.githubusercontent.com/conanzhangtech/mkstick/main/public/qr/usdt-trc20.svg" width="96" alt="QR code for the Tron USDT address"> |
+
+More ways to give are on the [support page](https://mkstick.czt.sh/#support). Starring the repository and telling a friend help too.
 
 Makes a bootable Windows or Linux USB stick from a web page. No app to install. Free and open source under the MIT licence.
 

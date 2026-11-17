@@ -50,7 +50,8 @@ async function loadCatalogue() {
   box.replaceChildren()
   if (failed) box.append(el('p', { className: 'status bad', textContent: failed }))
   const groups = [
-    ['Windows', (i) => i.kind === 'windows'],
+    ['Windows', (i) => i.kind === 'windows' && !i.manual],
+    ['Windows Server (free 180-day evaluation)', (i) => i.kind === 'windows' && i.manual],
     ['Linux', (i) => i.kind === 'linux'],
     ['Something else', (i) => i.kind === 'custom'],
   ]
@@ -72,6 +73,7 @@ async function loadCatalogue() {
       box.append(row)
     }
   }
+  refresh()
 }
 
 async function choose(item) {
@@ -88,22 +90,27 @@ async function choose(item) {
     const arch = $('win-arch')
     arch.replaceChildren(...item.archs.map((a) => new Option(a === 'x64' ? '64-bit Intel or AMD (most PCs)' : '64-bit Arm (Snapdragon PCs)', a)))
     $('win-bits').textContent =
-      item.id === 'win10'
+      item.manual
+        ? 'Windows Server is 64-bit only, for Intel and AMD servers and PCs.'
+        : item.id === 'win10'
         ? 'This is the 64-bit version, which suits any PC made since about 2010. Windows 10 also exists in 32-bit for very old PCs, and that one is only on Microsoft\'s download page.'
         : 'Windows 11 only comes in 64-bit, so there is no 32-bit choice to make. Nearly every PC has an Intel or AMD processor. Choose Arm only for a PC with a Snapdragon chip, which includes many Copilot+ laptops. If you are not sure, open Settings, then System, then About on that PC and read the line called "System type".'
     $('win-download').textContent = `Download ${item.name} from Microsoft`
     $('win-page-alt').href = item.page
     setStatus($('win-status'), '')
     showWindowsDirect(false)
-    loadLanguages()
+    if (!item.manual) loadLanguages()
     $('win-page').href = item.page
     $('win-how').textContent =
-      item.id === 'win10'
+      item.manual
+        ? 'On that page, press the ISO download, fill in the short form, pick your language and download the file, which is about 5 GB. It is a free evaluation copy that runs for 180 days.'
+        : item.id === 'win10'
         ? "On that page, pick the edition and your language, then press the 64-bit Download button. If you're on a Windows PC, the page offers a tool instead, and that tool can save an ISO file when you choose \"ISO file\"."
         : `On that page, scroll to "Download ${item.name} Disk Image (ISO)", pick the edition and your language, then press the 64-bit Download button. The file is about 6 GB.`
   }
   if (item.kind === 'linux') {
-    $('linux-text').textContent = `Project mkstick will download ${item.name} from ${item.from} while it writes and check it against the publisher's checksum, so there's nothing for you to do in this step.`
+    const online = item.repo ? ' This is a network installer, so the PC needs an internet connection when you install from the stick.' : ''
+    $('linux-text').textContent = `Project mkstick will download ${item.name} from ${item.from} while it writes and check it against the publisher's checksum, so there's nothing for you to do in this step.${online}`
     openRemote(item)
   }
   refresh()
@@ -192,7 +199,7 @@ async function readImage(source, info) {
   state.plan = null
   refresh()
   try {
-    const plan = await buildPlan(source)
+    const plan = await buildPlan(source, { patch: item.patch ? { name: item.patch, repo: item.repo } : null })
     if (state.item !== item) return
     if (item.kind === 'windows' && plan.kind !== 'windows') throw new Error("That file isn't a Windows installer, so please choose the ISO you downloaded from Microsoft")
     state.source = source
@@ -490,11 +497,20 @@ function refresh() {
     const resume = state.resuming ? ' Part of it is already there, so Project mkstick will carry on from where it stopped.' : ''
     $('write-plan').textContent = `Project mkstick will write ${what} to ${state.stickName}, which takes up ${gb(state.plan.totalBytes)}.${built}${split}${resume}`
   }
+  const name = state.plan?.needsName || ''
+  $('label-note').hidden = !name
+  for (const id of ['label-name', 'label-cmd', 'label-cmd2']) $(id).textContent = name
   document.querySelector('.change[data-step="step-files"]').hidden = item?.kind === 'linux'
   $('start').disabled = state.busy || !haveImage || !state.stick
   $('start').textContent = state.busy ? 'Writing…' : state.testStick ? 'Write to the test folder' : 'Write to the stick'
   for (const node of document.querySelectorAll('#catalogue input, #file, #win-download, #win-lang, #win-arch, #pick-stick, #pick-test, .change')) {
     node.disabled = state.busy || (node.name === 'what' && !!node.closest('.off'))
+  }
+  // Where a page cannot write to a drive, every control is switched off, so nothing looks usable.
+  if (!canWrite) {
+    for (const node of document.querySelectorAll('#tool button, #tool input, #tool select')) node.disabled = true
+    for (const a of document.querySelectorAll('#tool a')) (a.setAttribute('aria-disabled', 'true'), (a.tabIndex = -1))
+    $('tool').classList.add('locked')
   }
 }
 

@@ -19,33 +19,41 @@ const LANG = /^[A-Za-z ()-]{2,40}$/
 const MIRRORS = {
   ubuntu: { base: 'https://releases.ubuntu.com/', host: 'releases.ubuntu.com' },
   debian: { base: 'https://cdimage.debian.org/', host: 'cdimage.debian.org' },
+  mint: { base: 'https://mirrors.edge.kernel.org/linuxmint/stable/', host: 'mirrors.edge.kernel.org' },
+  arch: { base: 'https://geo.mirror.pkgbuild.com/', host: 'geo.mirror.pkgbuild.com' },
+  alpine: { base: 'https://dl-cdn.alpinelinux.org/alpine/latest-stable/releases/x86_64/', host: 'dl-cdn.alpinelinux.org' },
+  rocky: { base: 'https://dl.rockylinux.org/pub/rocky/', host: 'dl.rockylinux.org' },
+  alma: { base: 'https://repo.almalinux.org/almalinux/', host: 'repo.almalinux.org' },
 }
 
+// What each Linux entry is and where its checksum lives. Fields:
+//   dir      the folder on the publisher's server (or, with pickDir, a folder of version folders)
+//   match    the image's file name
+//   sums     the checksum file (default SHA256SUMS); perFile means "<image>.sha256" next to the image
+//   patch    a boot-menu fix the page applies while writing (see public/lib/patches.js)
+//   repo     for installers that fetch their packages online: the publisher's package tree
 const LINUX = [
-  {
-    id: 'ubuntu-desktop',
-    name: 'Ubuntu Desktop 24.04 LTS',
-    mirror: 'ubuntu',
-    dir: '24.04/',
-    match: /^ubuntu-[\d.]+-desktop-amd64\.iso$/,
-    stick: 8,
-  },
-  {
-    id: 'ubuntu-server',
-    name: 'Ubuntu Server 24.04 LTS',
-    mirror: 'ubuntu',
-    dir: '24.04/',
-    match: /^ubuntu-[\d.]+-live-server-amd64\.iso$/,
-    stick: 8,
-  },
-  {
-    id: 'debian',
-    name: 'Debian (network installer)',
-    mirror: 'debian',
-    dir: 'debian-cd/current/amd64/iso-cd/',
-    match: /^debian-[\d.]+-amd64-netinst\.iso$/,
-    stick: 2,
-  },
+  { id: 'ubuntu-2604-desktop', name: 'Ubuntu Desktop 26.04 LTS', mirror: 'ubuntu', dir: '26.04/', match: /^ubuntu-[\d.]+-desktop-amd64\.iso$/, stick: 8 },
+  { id: 'ubuntu-2604-server', name: 'Ubuntu Server 26.04 LTS', mirror: 'ubuntu', dir: '26.04/', match: /^ubuntu-[\d.]+-live-server-amd64\.iso$/, stick: 8 },
+  { id: 'ubuntu-desktop', name: 'Ubuntu Desktop 24.04 LTS', mirror: 'ubuntu', dir: '24.04/', match: /^ubuntu-[\d.]+-desktop-amd64\.iso$/, stick: 8 },
+  { id: 'ubuntu-server', name: 'Ubuntu Server 24.04 LTS', mirror: 'ubuntu', dir: '24.04/', match: /^ubuntu-[\d.]+-live-server-amd64\.iso$/, stick: 8 },
+  { id: 'debian', name: 'Debian (network installer)', mirror: 'debian', dir: 'debian-cd/current/amd64/iso-cd/', match: /^debian-[\d.]+-amd64-netinst\.iso$/, stick: 2 },
+  { id: 'debian-live', name: 'Debian Live (GNOME)', mirror: 'debian', dir: 'debian-cd/current-live/amd64/iso-hybrid/', match: /^debian-live-[\d.]+-amd64-gnome\.iso$/, stick: 8 },
+  { id: 'mint', name: 'Linux Mint (Cinnamon)', mirror: 'mint', pickDir: true, sums: 'sha256sum.txt', match: /^linuxmint-[\d.]+-cinnamon-64bit\.iso$/, stick: 8 },
+  { id: 'arch', name: 'Arch Linux', mirror: 'arch', dir: 'iso/latest/', sums: 'sha256sums.txt', match: /^archlinux-\d{4}\.\d{2}\.\d{2}-x86_64\.iso$/, stick: 4, patch: 'archiso' },
+  { id: 'alpine', name: 'Alpine Linux (standard)', mirror: 'alpine', dir: '', perFile: true, match: /^alpine-standard-\d+\.\d+\.\d+-x86_64\.iso$/, stick: 1 },
+  { id: 'rocky-10', name: 'Rocky Linux 10 (network installer)', mirror: 'rocky', dir: '10/isos/x86_64/', sums: 'CHECKSUM', match: /^Rocky-[\d.]+-\d+\.\d+-x86_64-boot\.iso$/, stick: 2, patch: 'anaconda', repo: 'https://dl.rockylinux.org/pub/rocky/10/BaseOS/x86_64/os/' },
+  { id: 'rocky-9', name: 'Rocky Linux 9 (network installer)', mirror: 'rocky', dir: '9/isos/x86_64/', sums: 'CHECKSUM', match: /^Rocky-[\d.]+-\d+\.\d+-x86_64-boot\.iso$/, stick: 2, patch: 'anaconda', repo: 'https://dl.rockylinux.org/pub/rocky/9/BaseOS/x86_64/os/' },
+  { id: 'alma-10', name: 'AlmaLinux 10 (network installer)', mirror: 'alma', dir: '10/isos/x86_64/', sums: 'CHECKSUM', match: /^AlmaLinux-[\d.]+-x86_64-boot\.iso$/, stick: 2, patch: 'anaconda', repo: 'https://repo.almalinux.org/almalinux/10/BaseOS/x86_64/os/' },
+  { id: 'alma-9', name: 'AlmaLinux 9 (network installer)', mirror: 'alma', dir: '9/isos/x86_64/', sums: 'CHECKSUM', match: /^AlmaLinux-[\d.]+-x86_64-boot\.iso$/, stick: 2, patch: 'anaconda', repo: 'https://repo.almalinux.org/almalinux/9/BaseOS/x86_64/os/' },
+]
+
+// Windows Server cannot be fetched by a link job: Microsoft hands it out through its Evaluation
+// Center, after a form. So the page shows where to download it, and the user then chooses the file.
+const WINDOWS_SERVER = [
+  { id: 'winserver-2025', name: 'Windows Server 2025 (evaluation)', page: 'https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2025' },
+  { id: 'winserver-2022', name: 'Windows Server 2022 (evaluation)', page: 'https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2022' },
+  { id: 'winserver-2019', name: 'Windows Server 2019 (evaluation)', page: 'https://www.microsoft.com/en-us/evalcenter/evaluate-windows-server-2019' },
 ]
 
 // Sent with every answer. The page loads nothing from other sites and cannot be framed.
@@ -114,34 +122,67 @@ async function tooMany(env, limiter, request) {
 
 const versionKey = (name) => (name.match(/\d+/g) || []).map((n) => n.padStart(4, '0')).join('.')
 
+/** Reads a checksum file in either layout: "<hash>  <file>" or "SHA256 (<file>) = <hash>". */
+function checksumRows(text) {
+  const rows = []
+  for (const line of text.slice(0, 200000).split('\n')) {
+    const l = line.trim()
+    const a = /^([0-9a-f]{64})\s+\*?(\S+)$/.exec(l)
+    const b = /^SHA256 \((\S+)\) = ([0-9a-f]{64})$/.exec(l)
+    if (a) rows.push([a[1], a[2]])
+    else if (b) rows.push([b[2], b[1]])
+  }
+  return rows
+}
+
 async function linuxEntry(def) {
   const mirror = MIRRORS[def.mirror]
-  const res = await fetch(mirror.base + def.dir + 'SHA256SUMS')
-  if (!res.ok) throw new Error(`${mirror.host} answered ${res.status}`)
-  const rows = (await res.text())
-    .slice(0, 100000)
-    .split('\n')
-    .map((l) => /^([0-9a-f]{64})\s+\*?(\S+)$/.exec(l.trim()))
-    .filter((m) => m && def.match.test(m[2]))
-    .sort((a, b) => (versionKey(a[2]) < versionKey(b[2]) ? -1 : 1))
+  let dir = def.dir || ''
+  if (def.pickDir) {
+    // The newest version folder, such as 22.3/
+    const list = await fetch(mirror.base)
+    if (!list.ok) throw new Error(`${mirror.host} answered ${list.status}`)
+    const dirs = [...(await list.text()).slice(0, 200000).matchAll(/href="(\d+(?:\.\d+)*\/)"/g)].map((m) => m[1])
+    dir = dirs.sort((a, b) => (versionKey(a) < versionKey(b) ? -1 : 1)).pop() || ''
+  }
+  let rows
+  if (def.perFile) {
+    const list = await fetch(mirror.base + dir)
+    if (!list.ok) throw new Error(`${mirror.host} answered ${list.status}`)
+    const names = [...(await list.text()).slice(0, 400000).matchAll(/href="([^"]+\.iso)"/g)].map((m) => m[1]).filter((n) => def.match.test(n))
+    const name = names.sort((a, b) => (versionKey(a) < versionKey(b) ? -1 : 1)).pop()
+    if (!name) throw new Error(`No image found on ${mirror.host}`)
+    const sum = await fetch(`${mirror.base}${dir}${name}.sha256`)
+    const hash = sum.ok ? /^([0-9a-f]{64})/.exec((await sum.text()).trim())?.[1] : null
+    if (!hash) throw new Error('No checksum')
+    rows = [[hash, name]]
+  } else {
+    const res = await fetch(mirror.base + dir + (def.sums || 'SHA256SUMS'))
+    if (!res.ok) throw new Error(`${mirror.host} answered ${res.status}`)
+    rows = checksumRows(await res.text())
+      .filter((r) => def.match.test(r[1]))
+      .sort((a, b) => (versionKey(a[1]) < versionKey(b[1]) ? -1 : 1))
+  }
   const row = rows.pop()
   if (!row) throw new Error(`No image found on ${mirror.host}`)
-  const head = await fetch(mirror.base + def.dir + row[2], { method: 'HEAD' })
+  const [sha256, file] = row
+  const head = await fetch(mirror.base + dir + file, { method: 'HEAD' })
   return {
     id: def.id,
     kind: 'linux',
     name: def.name,
-    file: row[2],
-    sha256: row[1],
+    file,
+    sha256,
     size: Number(head.headers.get('content-length')) || null,
-    url: `/mirror/${def.mirror}/${def.dir}${row[2]}`,
+    url: `/mirror/${def.mirror}/${dir}${file}`,
     from: mirror.host,
     stick: def.stick,
+    ...(def.patch ? { patch: def.patch, repo: def.repo } : {}),
   }
 }
 
 async function catalogue(ctx) {
-  const linux = await cached(ctx, 'catalogue-linux-v2', 3600, async () => {
+  const linux = await cached(ctx, 'catalogue-linux-v3', 3600, async () => {
     const out = []
     for (const def of LINUX) {
       try {
@@ -160,7 +201,8 @@ async function catalogue(ctx) {
     stick: 16,
     page: `https://www.microsoft.com/software-download/${p.page}`,
   }))
-  return [...windows, ...linux]
+  const servers = WINDOWS_SERVER.map((p) => ({ id: p.id, kind: 'windows', manual: true, name: p.name, archs: ['x64'], stick: 16, page: p.page }))
+  return [...windows, ...servers, ...linux]
 }
 
 /** A download link is only passed on if it is an https address on a Microsoft server. */

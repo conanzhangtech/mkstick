@@ -257,3 +257,7 @@ progress { width: 100%; max-width: var(--measure); height: 14px; accent-color: v
 @media (prefers-reduced-motion: no-preference) {
   html { scroll-behavior: smooth; }
 }
+
+/* Where the browser cannot write to a drive, the whole tool is shown switched off. */
+.locked { opacity: 0.55; }
+.locked a, .locked .drop, .locked label { pointer-events: none; cursor: not-allowed; }

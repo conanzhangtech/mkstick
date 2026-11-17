@@ -11,7 +11,7 @@
 ## How to use it
 
 1. Open [mkstick.czt.sh](https://mkstick.czt.sh) in Chrome or Edge on a computer.
-2. Pick a system: Windows 11, Windows 10, Ubuntu, Debian, or your own ISO file.
+2. Pick a system: Windows, Windows Server, Ubuntu, Debian, Mint, Arch, Rocky, Alma, Alpine or your own ISO file.
 3. Plug in an empty FAT32 USB stick and choose it.
 4. Press the button. Wait until it says it is done, then start your PC from the stick.
 
@@ -20,9 +20,14 @@
 | System | Where the installer comes from |
 | --- | --- |
 | Windows 11 and 10 | Microsoft. Your browser downloads the file, then you choose it. |
-| Ubuntu Desktop and Server | Ubuntu's own server, checked against its published checksum |
-| Debian | Debian's own server, checked against its published checksum |
+| Windows Server 2025, 2022 and 2019 | Microsoft's free 180-day evaluation. Download it there, then choose the file. |
+| Ubuntu Desktop and Server (26.04 and 24.04) | Ubuntu's own server, checked against its published checksum |
+| Debian (network installer, or Live GNOME) | Debian's own server, checked against its published checksum |
+| Linux Mint (Cinnamon), Arch Linux, Alpine Linux | Each one's own server, checked against its checksum |
+| Rocky Linux and AlmaLinux 9 and 10 (network installers) | Each one's own server, checked against its checksum. The PC needs internet when you install. |
 | Anything else | An ISO file you already have |
+
+Arch Linux only starts from a stick named `ARCH_202611`, and the page tells you this before you choose the stick.
 
 ## Proof it works
 
@@ -36,7 +41,13 @@ These are sticks made by the engine, started in a virtual PC.
 | --- | --- |
 | ![Debian installer](https://raw.githubusercontent.com/conanzhangtech/mkstick/main/test/proof/debian-installer.png) | ![Ubuntu Server installer](https://raw.githubusercontent.com/conanzhangtech/mkstick/main/test/proof/ubuntu-server-installer.png) |
 
-On a phone: <img src="https://raw.githubusercontent.com/conanzhangtech/mkstick/main/docs/images/mobile.png" width="200" alt="The site on a phone" align="top">
+| Rocky Linux 10 installer | Arch Linux |
+| --- | --- |
+| ![Rocky Linux installer](https://raw.githubusercontent.com/conanzhangtech/mkstick/main/test/proof/rocky-installer.png) | ![Arch Linux](https://raw.githubusercontent.com/conanzhangtech/mkstick/main/test/proof/arch-login.png) |
+
+Also tested on a real USB stick, written from the browser.
+
+In Safari, Firefox and on phones the buttons are switched off, because those browsers cannot write to a drive: <img src="https://raw.githubusercontent.com/conanzhangtech/mkstick/main/docs/images/mobile.png" width="200" alt="The site on a phone" align="top">
 
 ## How it works
 

@@ -7,7 +7,7 @@ mkstick makes a bootable Windows or Linux USB stick from a web page, with nothin
 - Source code: https://github.com/conanzhangtech/mkstick
 - Public write-up: https://czt.sh/projects/mkstick
 - Licence: MIT
-- Status on 15 November 2026: working demo on staging. Writing to a real USB stick through the browser's folder picker has not been tested yet.
+- Status on 17 November 2026: live. Writing to a real USB stick through the browser's folder picker has been tested and works.
 
 ## Contents
 
@@ -33,7 +33,9 @@ A person picks a system, plugs in a stick and presses a button. mkstick writes t
 | System | Where the image comes from |
 |---|---|
 | Windows 11 (x64 and Arm), Windows 10 | Microsoft. The person's browser downloads the ISO from Microsoft, then they choose that file. |
-| Ubuntu Desktop and Server 24.04, Debian network installer | The publisher's own server, read through mkstick's Worker in pieces and checked against the publisher's SHA-256. |
+| Windows Server 2025, 2022 and 2019 (evaluation) | Microsoft's Evaluation Center. The person downloads the ISO there, then chooses that file. |
+| Ubuntu Desktop and Server 26.04 and 24.04, Debian network installer, Debian Live (GNOME), Linux Mint (Cinnamon), Arch Linux, Alpine Linux | The publisher's own server, read through mkstick's Worker in pieces and checked against the publisher's SHA-256. |
+| Rocky Linux 9 and 10, AlmaLinux 9 and 10 (network installers) | The publisher's own server, in the same way. Their boot menu is changed while writing (section 5). |
 | Any other installer | An ISO file the person already has. |
 
 mkstick stores no disc images. It has no accounts, cookies or analytics.
@@ -134,6 +136,17 @@ Things worth knowing:
 - **Symbolic links.** FAT32 has none. A link to a file, or to a folder under 64 MB, is copied as real files. A link to itself or a parent is skipped.
 - **Names from an image are not trusted** (section 8).
 - **What cannot be split.** ESD and "solid" Windows images, and any single non-WIM file over 4 GB.
+
+### Boot menu fixes
+
+Most installers start from a copied stick as they are. A few look for their own disc by its name, and a stick carries a different name. `public/lib/patches.js` holds the small rewrites for those, and the Worker marks which entries need one (`patch` in the catalogue).
+
+| Installer | What it looked for | What the page changes |
+|---|---|---|
+| Rocky Linux, AlmaLinux (anaconda) | The disc named in `grub.cfg`, for both the search and `inst.stage2` | The search uses the installer's own file, and `inst.stage2` points at the publisher's package server. These are network installers, so the PC needs internet during setup. |
+| Arch Linux (archiso) | The ISO's built-in ID, `archisosearchuuid` | `archisolabel` with the disc's name, `ARCH_202611` at the time of writing. It has 11 characters, which is the most a FAT32 label can have, so the person formats the stick with that name. The page shows the name before the stick is chosen. |
+
+The rewrite changes only those lines. The checksum is still taken from the image as downloaded, because the engine hashes the whole image in order and the rewritten files are only what is written.
 
 ## 6. The Worker
 
@@ -285,15 +298,19 @@ To host mkstick somewhere else: change `routes` in `wrangler.jsonc`, change or r
 | The split, checked by wimlib | Verified. Part sizes equal wimlib's own split on a small image. |
 | Windows 11 stick image in QEMU | Setup starts and lists all editions, so it reads the split file. |
 | Debian and Ubuntu Server stick images in QEMU | Both reach their installers. Both checksums match. |
+| Alpine Linux 3.24 stick image in QEMU | Reaches the login prompt. Checksum matches. |
+| Rocky Linux 10 network installer stick image in QEMU | The changed boot menu starts the installer, which fetches its second stage from Rocky's server and shows its welcome screen. Checksum matches. |
+| Arch Linux stick image in QEMU, formatted with the name `ARCH_202611` | Starts and logs in as root. Without that name it stops with "device not found". Checksum matches. |
+| A real USB stick, written from the browser through the folder picker | Works. |
 | Debian on the live site, into the test folder | 1,073 files in about 35 seconds, checksum matches. |
 | The Windows links job | 24 links stored (three versions, eight languages). A stored link answers from Microsoft. |
 | `test/security-check.mjs` on staging | All checks pass. |
 
 ## 13. Open items
 
-- **Writing to a real USB stick through Chrome's folder picker is untested.** Chrome may refuse the top of a drive. This is the largest unknown.
-- Ubuntu Desktop has been read but not boot-tested.
-- Windows 10 and Arm ISOs have not been run through the engine.
+- Not yet boot-tested: Ubuntu 26.04, Debian Live, Linux Mint, AlmaLinux and Rocky Linux 9, Windows Server (the ISO from the Evaluation Center), Windows 10 and Arm ISOs. They use the same method as the systems that were tested.
+- Arch Linux only starts from a stick named after its ISO (`ARCH_202611`). If a stick is not named that, the boot stops at a shell with "device not found".
+- The Evaluation Center page addresses for Windows Server are written from the pattern Microsoft uses. Check them now and then.
 - The one-click Windows download has not been followed by a full download and write in the browser.
 - Cloudflare adds its Web Analytics script to the page. The security policy blocks it, which leaves an error in the browser console. Turn it off for this hostname in the dashboard.
 

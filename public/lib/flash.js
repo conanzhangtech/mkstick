@@ -1,6 +1,7 @@
 // Works out what to write to the stick, then writes it.
 // The stick is any object shaped like the browser's FileSystemDirectoryHandle.
 
+import { patchFor } from './patches.js'
 import { readIso9660 } from './iso9660.js'
 import { readUdf } from './udf.js'
 import { planWimSplit } from './wim.js'
@@ -40,7 +41,7 @@ async function readFromExtents(source, extents, start, length) {
  * Reads the disc image and decides what goes on the stick.
  * @returns {Promise<{kind:string,format:string,label:string,outputs:Array,totalBytes:number,skipped:string[],notes:string[]}>}
  */
-export async function buildPlan(rawSource, { wimPart = WIM_PART } = {}) {
+export async function buildPlan(rawSource, { wimPart = WIM_PART, patch = null } = {}) {
   const source = new CachedSource(rawSource, 2 * 1024 * 1024, 32)
   // Windows discs carry both formats, and the ISO 9660 side only holds a readme. Try UDF first.
   let image = await readUdf(source)
@@ -81,6 +82,7 @@ export async function buildPlan(rawSource, { wimPart = WIM_PART } = {}) {
   }
   if (linked) notes.push(`${linked} shortcuts inside the image were copied as real files`)
 
+  const patchWith = patch ? { ...patch, label: image.label } : null
   const windows = isWindows ? await windowsDetails(source, lower.get('sources/install.wim') || lower.get('sources/install.esd')) : null
 
   const seenNames = new Set()
@@ -116,6 +118,17 @@ export async function buildPlan(rawSource, { wimPart = WIM_PART } = {}) {
       notes.push(`install.wim (${gb(f.size)}) is split into ${parts.length} parts`)
       continue
     }
+    const change = f.size < 200000 && !f.inline ? patchFor(patchWith, f.path) : null
+    if (change) {
+      const before = new TextDecoder().decode(await readFromExtents(source, f.extents, 0, f.size))
+      const after = change(before)
+      if (after !== before) {
+        const bytes = new TextEncoder().encode(after)
+        outputs.push({ path: f.path, size: bytes.length, segments: [{ bytes }] })
+        if (!notes.some((n) => n.includes('boot menu'))) notes.push('the boot menu was changed so that the installer finds itself on a stick')
+        continue
+      }
+    }
     outputs.push({
       path: f.path,
       size: f.size,
@@ -132,6 +145,8 @@ export async function buildPlan(rawSource, { wimPart = WIM_PART } = {}) {
     windows,
     format: image.format,
     label: image.label,
+    // Some installers only find themselves on a stick that carries the disc's own name.
+    needsName: patch?.name === 'archiso' && /^[A-Za-z0-9_-]{1,11}$/.test(image.label) ? image.label : null,
     outputs,
     dirs: image.dirs.filter((d) => !badPath(d)),
     totalBytes: outputs.reduce((n, o) => n + o.size, 0),

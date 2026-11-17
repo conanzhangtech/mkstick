@@ -68,6 +68,7 @@ const SECURITY_HEADERS = {
     "manifest-src 'self'",
     "base-uri 'none'",
     "form-action 'none'",
+    'frame-src https://ko-fi.com', // the support popup, opened only when someone presses its button
     "frame-ancestors 'none'",
     "require-trusted-types-for 'script'",
     "trusted-types 'none'",
